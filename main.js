@@ -4,18 +4,47 @@ const toDoItem = '[1] Create a to-do item ';
 const completeToDo = '[2] Complete a to-do item ';
 const editItem = '[3] Edit an item';
 const removeItem = '[4] Remove an item';
-const end = '[5] End to-do list ';
+const sort = '[5] Sort (alphabetically or by priority)'
+const end = '[6] End to-do list ';
 // Create array to contain the to-do list
 const toDoItemList = [];
 // Create array to contain the completed status
 const completedItemList = [];
+// Create array to contain priority list
+const priorityList = [];
 // Establish the selection method
 let selector = "";
+let today = new Date();
+let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+const currentTime = [];
 
 function addToList() {
-        let item = prompt("Add your item: ");
-        toDoItemList.push(item);
+    let item = prompt("Add your item: ");
+    currentTime.push(time);
+            toDoItemList.push(item);
         completedItemList.push('[Incomplete]'); 
+}
+
+
+function sortItems() {
+    console.log('~ Sorting the list ~');
+    let sortBy = prompt("Sort by (1) Alphabetically or (2) by Priority ");
+    if (sortBy === 1) {
+        
+            toDoItemList.sort();
+        }
+    
+    else {
+                priorityList.sort();
+            }
+        }
+
+
+function prioritize() {  // Adds a priority to the item
+    console.log("");
+    console.log('~ Set a priority ~')
+    let priority = prompt("What is the priority of this to-do (0 -4) ");
+    priorityList.push(priority);
 }
 
 function makeComplete() {
@@ -56,6 +85,9 @@ function removeItemFromList() {  // This allows us to remove an item from the li
     for (i = 0; i < toDoItemList.length; i++){
         if (remove === toDoItemList[i]) {
             toDoItemList.splice(i, 1);
+            completedItemList.splice(i, 1);
+            priorityList.splice(i, 1);
+            currentTime.splice(i, 1);
             found = true;
         }
     }
@@ -64,11 +96,11 @@ function removeItemFromList() {  // This allows us to remove an item from the li
     }
 }
 
-while (selector !== 5) {  // This will run until the user exits with a '5'
+while (selector !== 6) {  // This will run until the user exits with a '5'
     console.log(`You have ${toDoItemList.length} item(s) on your list`)
     console.log("");
     for (i = 0; i < toDoItemList.length; i++){  // iterate through to count the number of items and print out the number
-        console.log(`${i + 1}. ${completedItemList[i]} ${toDoItemList[i]}`);
+        console.log(`${i + 1}. ${currentTime[i]} (P${priorityList[i]}) ${completedItemList[i]} ${toDoItemList[i]}`);
     }
     console.log("");
     console.log("~ Select an action ~");
@@ -76,12 +108,14 @@ while (selector !== 5) {  // This will run until the user exits with a '5'
     console.log(completeToDo);
     console.log(editItem);
     console.log(removeItem);
+    console.log(sort);
     console.log(end);
     selector = Number(prompt('> '));
 
     
     if (selector === 1) {  // This is where we will add items to the list and auto assign 'Incomplete' to them
         addToList();
+        prioritize();
     }
     if (selector === 2) {  // This is where we can select something to be marked as 'Complete'
         makeComplete();
@@ -91,6 +125,9 @@ while (selector !== 5) {  // This will run until the user exits with a '5'
     }
     if (selector === 4) {  // This is where we can select something to be removed
         removeItemFromList();
+    }
+    if (selector === 5) {
+        sortItems();
     }
     }
 
