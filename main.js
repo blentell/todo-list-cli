@@ -31,6 +31,7 @@ const currentTime = [];
 // Create a function to add initial items to the list
 function addToList() {
 	let item = prompt("Add your item: ");
+	console.log("");
 	currentTime.push(time); // Stores the current time in the currentTime array
 	toDoItemList.push(item); // Stores the item to the toDoItemList array
 	completedItemList.push("[Incomplete]");
@@ -40,6 +41,7 @@ function addToList() {
 function sortItems() {
 	console.log("~ Sorting the list ~");
 	let sortBy = prompt("Sort by (1) Alphabetically or (2) by Priority ");
+	console.log("");
 	if (sortBy === 1) {
 		toDoItemList.sort();
 	} else {
@@ -49,9 +51,9 @@ function sortItems() {
 
 // Create a function to assign a priority to the item
 function prioritize() {
-	console.log("");
 	console.log("~ Set a priority ~");
 	let priority = prompt("What is the priority of this to-do (0 -4) ");
+	console.log("");
 	priorityList.push(priority); // Stores the priority in the priorityList array
 }
 
@@ -59,9 +61,10 @@ function prioritize() {
 // complete will change it to incomplete and vice versa)
 function makeComplete() {
 	const update = prompt("Which item should be completed? ");
+	console.log("");
 	let found = false; // Had to create a boolean to not print out the 'invalid item'
 	for (i = 0; i < toDoItemList.length; i++) {
-		// Iterates throught the toDoItemList
+		// Iterates through the toDoItemList
 		// to find the item typed in and changes the status of that item to Complete
 		// or incomplete
 		if (update === toDoItemList[i] && completedItemList[i] === "[Incomplete]") {
@@ -74,18 +77,21 @@ function makeComplete() {
 	if (found == false) {
 		// This tells the user that the item they want to update does not exist
 		console.log("That is not a valid item!");
+		console.log("");
 	}
 }
 
 // Creates a function that allows us to change the name of an item on the toDoItemList
 function editItemOnList() {
 	const edit = prompt("Which item should be edited? ");
+	console.log("");
 	let found = false;
 	for (i = 0; i < toDoItemList.length; i++) {
 		// Iterates through the toDoItemList to find the name that is typed in and then
 		// prompts the user for what to change that item to (removes than replaces)
 		if (edit === toDoItemList[i]) {
 			const edit2 = prompt(`Change ${edit} to what? `);
+			console.log("");
 			toDoItemList.splice(i, 1, edit2);
 			found = true;
 		}
@@ -93,6 +99,7 @@ function editItemOnList() {
 	if (found === false) {
 		// This tells the user that the item they want to update does not exist
 		console.log("That is not a valid item!");
+		console.log("");
 	}
 }
 
@@ -100,6 +107,7 @@ function editItemOnList() {
 // completion status, priority list, and time stamp
 function removeItemFromList() {
 	const remove = prompt("Which item should be removed? ");
+	console.log("");
 	let found = false;
 	for (i = 0; i < toDoItemList.length; i++) {
 		if (remove === toDoItemList[i]) {
@@ -113,13 +121,14 @@ function removeItemFromList() {
 	if (found === false) {
 		// This tells the user that the item they want to update does not exist
 		console.log("That is not a valid item!");
+		console.log("");
 	}
 }
 
 // Start the While loop until the users prompts an exit by inputting '6', resetting all the data
 while (selector !== 6) {
-	console.log(`You have ${toDoItemList.length} item(s) on your list`);
 	console.log("");
+	console.log(`You have ${toDoItemList.length} item(s) on your list`);
 	for (i = 0; i < toDoItemList.length; i++) {
 		// iterate through to count the number of items and print out the number, give us the time
 		// stamp, priority list, completion status and list items in a sequential list
@@ -140,6 +149,7 @@ while (selector !== 6) {
 	console.log(sort);
 	console.log(end);
 	selector = Number(prompt("> "));
+	console.log("");
 
 	if (selector === 1) {
 		// This is where we will add items to the list and auto assign 'Incomplete' to them
